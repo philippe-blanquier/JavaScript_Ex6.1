@@ -18,15 +18,14 @@
 	<body>
         <form>
             <fieldset>
-                <legend>Game</legend>
-                <div>
-                    <label for="paper">Papier</label>
-                    <input type="radio" id="paper" name="choice" value="Papier" class="radio_btn">
-                    <label for="stone">Pierre</label>
-                    <input type="radio" id="stone" name="choice" value="Pierre" class="radio_btn">
-                    <label for="cisor">Ciseaux</label>
-                    <input type="radio" id="cisor" name="choice" value="Ciseaux" class="radio_btn">   
-                </div>  
+                <legend>Shifumi Game</legend>
+                <label class="label_btn">User choice:  </label>
+                <label class="label_btn" for="paper">Papier</label>
+                <input type="radio" id="paper" name="choice" value="Papier" class="radio_btn">
+                <label class="label_btn" for="stone">Pierre</label>
+                <input type="radio" id="stone" name="choice" value="Pierre" class="radio_btn">
+                <label class="label_btn" for="cisor">Ciseaux</label>
+                <input type="radio" id="cisor" name="choice" value="Ciseaux" class="radio_btn">   
             </fieldset>
             <button type="button" onclick="playGame()">Shifumi !</button>
             <button type="button" onclick="resetGame()">CleanUp</button>
