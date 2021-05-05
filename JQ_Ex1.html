@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+        <!-- Do not cache this web page -->
+        <meta http-equiv= "cache-control" content= "no-cache, no-store, must-revalidate"> <!-- for HTTP 1.1 -->
+        <meta http-equiv= "pragma" content= "no-cache"> <!-- for HTTP 1.0 -->
+        <meta http-equiv= "expires" content= "0"> <!-- for proxies -->
+        <!-- Go on -->
+        <title>Shifumi</title>
+		<meta charset="UTF-8">
+		<!-- Test JavaScript -->
+		<noscript>Your browser does not support Javascript.</noscript>
+		<!-- Import JQuery library -->
+        <script  type="text/javascript" src="jquery-3.6.0.min.js"></script>
+        <script  type="text/javascript" src="math.js"></script>
+    </head>
+	<body>
+        <form>
+            <fieldset>
+                <legend>Game</legend>
+                <div>
+                    <label for="paper">Papier</label>
+                    <input type="radio" id="paper" name="choice" value="Papier">
+                    <label for="stone">Pierre</label>
+                    <input type="radio" id="stone" name="choice" value="Pierre">
+                    <label for="cisor">Ciseaux</label>
+                    <input type="radio" id="cisor" name="choice" value="Ciseaux">   
+                </div>  
+            </fieldset>
+            <button type="button" onclick="playGame()">Shifumi !</button>
+            <p>Computer choice: <span id="computerSelectionId">xxx</span></p>
+            <p>The winner is  : <span id="winnerId">xxx</span></p>
+            <p>Counters : user / computer = <span id="userCounterId">0</span> (<span id="userPercentId"> 0</span> %) / <span id="computerCounterId">0</span></p>
+        </form>
+        <script type="text/javascript">
+            let userWinCounter= 0,
+                computerWinCounter= 0;
+            function selectChoice()
+            {
+                let shifumi_answer= ["Pierre", "Papier", "Ciseaux"];     
+                // 0, 1 or 2
+                let idx= Math.floor(Math.random() * 3);
+                return shifumi_answer[idx];
+            }
+            function displayResult( userIsWinner=false, computerIsWinner=false)
+            {
+                let winnerName;
+                if (userIsWinner == true)
+                    {
+                    winnerName= "User";
+                    userWinCounter += 1;
+                    }
+                else
+                    {
+                    if (computerIsWinner == true)
+                        {
+                        winnerName= "Computer";
+                        computerWinCounter += 1;
+                        }
+                    else
+                        {
+                        winnerName= "Equality: No winner...";
+                        }
+                    }
+                // The result is
+                $("#winnerId").text(winnerName);
+                if (userWinCounter+computerWinCounter > 0)
+                {
+                    let userPercent = Math.trunc( (100*userWinCounter)/(userWinCounter+computerWinCounter));
+                    $("#userPercentId").text(userPercent);      
+                }
+                $("#userCounterId").text(userWinCounter);
+                $("#computerCounterId").text(computerWinCounter);
+            }
+            function playGame()
+            {
+                let userChoice = $("form input[type='radio']:checked").val();
+                console.log(`playGame User: ${userChoice}`);
+                let computerChoice= selectChoice();
+                console.log(`playGame Computer: ${computerChoice}`);
+                $("#computerSelectionId").text(computerChoice);
+                // Who win ?
+                let userWin = false;
+                let computerWin = false;
+                switch (userChoice)
+                {
+                    case "Pierre":
+                        switch (computerChoice)
+                        {
+                            case "Papier": computerWin=true; userWin=false; break;
+                            case "Ciseaux": computerWin=false; userWin=true; break;
+                            default: computerWin=false; userWin=false; break;
+                        }
+                        break;
+                    case "Papier":
+                        switch (computerChoice)
+                        {
+                            case "Pierre": computerWin=false; userWin=true; break;
+                            case "Ciseaux": computerWin=true; userWin=false; break;
+                            default: computerWin=false; userWin=false; break;
+                        }
+                        break;
+                    case "Ciseaux":
+                        switch (computerChoice)
+                        {
+                            case "Papier": computerWin=false; userWin=true; break;
+                            case "Pierre": computerWin=true; userWin=false; break;
+                            default: computerWin=false; userWin=false; break;
+                        }
+                        break;
+                    default: computerWin=false; userWin=false; break;
+                }
+                displayResult( userWin, computerWin);
+            }
+        </script>
+    </body>
+</html>
