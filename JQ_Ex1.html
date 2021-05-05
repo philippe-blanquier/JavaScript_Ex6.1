@@ -10,6 +10,7 @@
 		<meta charset="UTF-8">
 		<!-- Test JavaScript -->
 		<noscript>Your browser does not support Javascript.</noscript>
+        <link rel="stylesheet" type="text/css" href="JQ_Ex1.css">
 		<!-- Import JQuery library -->
         <script  type="text/javascript" src="jquery-3.6.0.min.js"></script>
         <script  type="text/javascript" src="math.js"></script>
@@ -20,14 +21,15 @@
                 <legend>Game</legend>
                 <div>
                     <label for="paper">Papier</label>
-                    <input type="radio" id="paper" name="choice" value="Papier">
+                    <input type="radio" id="paper" name="choice" value="Papier" class="radio_btn">
                     <label for="stone">Pierre</label>
-                    <input type="radio" id="stone" name="choice" value="Pierre">
+                    <input type="radio" id="stone" name="choice" value="Pierre" class="radio_btn">
                     <label for="cisor">Ciseaux</label>
-                    <input type="radio" id="cisor" name="choice" value="Ciseaux">   
+                    <input type="radio" id="cisor" name="choice" value="Ciseaux" class="radio_btn">   
                 </div>  
             </fieldset>
             <button type="button" onclick="playGame()">Shifumi !</button>
+            <button type="button" onclick="resetGame()">CleanUp</button>
             <p>Computer choice: <span id="computerSelectionId">xxx</span></p>
             <p>The winner is  : <span id="winnerId">xxx</span></p>
             <p>Counters : user / computer = <span id="userCounterId">0</span> (<span id="userPercentId"> 0</span> %) / <span id="computerCounterId">0</span></p>
@@ -35,6 +37,15 @@
         <script type="text/javascript">
             let userWinCounter= 0,
                 computerWinCounter= 0;
+            function resetGame()
+            {
+                userWinCounter=0
+                computerWinCounter=0
+                $("#winnerId").text("...");
+                $("#userCounterId").text(userWinCounter);
+                $("#computerCounterId").text(computerWinCounter);
+                $("#computerSelectionId").text("...");
+            }
             function selectChoice()
             {
                 let shifumi_answer= ["Pierre", "Papier", "Ciseaux"];     
@@ -75,9 +86,7 @@
             function playGame()
             {
                 let userChoice = $("form input[type='radio']:checked").val();
-                console.log(`playGame User: ${userChoice}`);
                 let computerChoice= selectChoice();
-                console.log(`playGame Computer: ${computerChoice}`);
                 $("#computerSelectionId").text(computerChoice);
                 // Who win ?
                 let userWin = false;
