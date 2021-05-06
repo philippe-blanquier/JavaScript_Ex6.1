@@ -11,9 +11,6 @@
 		<!-- Test JavaScript -->
 		<noscript>Your browser does not support Javascript.</noscript>
         <link rel="stylesheet" type="text/css" href="JQ_Ex1.css">
-		<!-- Import JQuery library -->
-        <script  type="text/javascript" src="jquery-3.6.0.min.js"></script>
-        <script  type="text/javascript" src="math.js"></script>
     </head>
 	<body>
         <form>
@@ -34,6 +31,9 @@
             <p>Play counter   : <span id="allCounterId">...</span></p>
             <p>Counters : user / computer = <span id="userCounterId">0</span> (<span id="userPercentId"> 0</span> %) / <span id="computerCounterId">0</span></p>
         </form>
+		<!-- Import JavaScript & JQuery libraries -->
+        <script  type="text/javascript" src="math.js"></script>
+        <script  type="text/javascript" src="jquery-3.6.0.min.js"></script>
         <script type="text/javascript">
             let userWinCounter= 0,
                 computerWinCounter= 0,
@@ -52,10 +52,10 @@
             }
             function selectChoice()
             {
-                let shifumi_answer= ["Pierre", "Papier", "Ciseaux"];     
+                let shifumiAnswerList= ["Pierre", "Papier", "Ciseaux"];     
                 // 0, 1 or 2
-                let idx= Math.floor(Math.random() * 3);
-                return shifumi_answer[idx];
+                let idx= Math.floor(Math.random() * shifumiAnswerList.length);
+                return shifumiAnswerList[idx];
             }
             function displayResult( userIsWinner=false, computerIsWinner=false)
             {
@@ -103,28 +103,28 @@
                     case "Pierre":
                         switch (computerChoice)
                         {
-                            case "Papier": computerWin=true; userWin=false; break;
-                            case "Ciseaux": computerWin=false; userWin=true; break;
-                            default: computerWin=false; userWin=false; break;
+                            case "Papier": computerWin=true;  break;
+                            case "Ciseaux": userWin=true; break;
+                            default: break;
                         }
                         break;
                     case "Papier":
                         switch (computerChoice)
                         {
-                            case "Pierre": computerWin=false; userWin=true; break;
-                            case "Ciseaux": computerWin=true; userWin=false; break;
-                            default: computerWin=false; userWin=false; break;
+                            case "Pierre": userWin=true; break;
+                            case "Ciseaux": computerWin=true; break;
+                            default: break;
                         }
                         break;
                     case "Ciseaux":
                         switch (computerChoice)
                         {
-                            case "Papier": computerWin=false; userWin=true; break;
-                            case "Pierre": computerWin=true; userWin=false; break;
-                            default: computerWin=false; userWin=false; break;
+                            case "Papier": userWin=true; break;
+                            case "Pierre": computerWin=true; break;
+                            default: break;
                         }
                         break;
-                    default: computerWin=false; userWin=false; break;
+                    default: break;
                 }
                 displayResult( userWin, computerWin);
             }
