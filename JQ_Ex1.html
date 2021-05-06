@@ -29,21 +29,26 @@
             </fieldset>
             <button type="button" onclick="playGame()">Shifumi !</button>
             <button type="button" onclick="resetGame()">CleanUp</button>
-            <p>Computer choice: <span id="computerSelectionId">xxx</span></p>
-            <p>The winner is  : <span id="winnerId">xxx</span></p>
+            <p>Computer choice: <span id="computerSelectionId">...</span></p>
+            <p>The winner is  : <span id="winnerId">...</span></p>
+            <p>Play counter   : <span id="allCounterId">...</span></p>
             <p>Counters : user / computer = <span id="userCounterId">0</span> (<span id="userPercentId"> 0</span> %) / <span id="computerCounterId">0</span></p>
         </form>
         <script type="text/javascript">
             let userWinCounter= 0,
-                computerWinCounter= 0;
+                computerWinCounter= 0,
+                equalityCounter= 0;
             function resetGame()
             {
-                userWinCounter=0
-                computerWinCounter=0
+                userWinCounter=0;
+                computerWinCounter=0;
+                equalityCounter= 0;
                 $("#winnerId").text("...");
                 $("#userCounterId").text(userWinCounter);
                 $("#computerCounterId").text(computerWinCounter);
                 $("#computerSelectionId").text("...");
+                $("#userPercentId").text(0);    
+                $("#allCounterId").text(0);    
             }
             function selectChoice()
             {
@@ -70,17 +75,20 @@
                     else
                         {
                         winnerName= "Equality: No winner...";
+                        equalityCounter += 1;
                         }
                     }
                 // The result is
                 $("#winnerId").text(winnerName);
-                if (userWinCounter+computerWinCounter > 0)
+                let allPlayCounter= userWinCounter+computerWinCounter+equalityCounter;
+                if ( allPlayCounter > 0)
                 {
-                    let userPercent = Math.trunc( (100*userWinCounter)/(userWinCounter+computerWinCounter));
+                    let userPercent = Math.trunc( (100*userWinCounter)/allPlayCounter);
                     $("#userPercentId").text(userPercent);      
                 }
                 $("#userCounterId").text(userWinCounter);
                 $("#computerCounterId").text(computerWinCounter);
+                $("#allCounterId").text(allPlayCounter);
             }
             function playGame()
             {
